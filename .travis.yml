@@ -1,23 +1,21 @@
 # Travis-CI
 dist: bionic
-language: shell
+language: python
 os: linux
 
-before_install:
-  - sudo rm -rf /var/lib/apt/lists/*
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - lsb_release -cs
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge"
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
-  - docker run --rm --privileged aptman/qus -s -- -p ppc64le
+matrix:
+  include:
+    - python: '3.6'
+    - python: '3.7'
+    - python: '3.8'
+    # Docker dev image
+    - sudo: true
+      services:
+        - docker
 
-before_script:
-  - docker version
-  - docker buildx create --name moc_builder --use
-  - |
-      if [ -n "$TRAVIS_TAG" ]; then
-        export SPECIFIC_TAG="-t '$IMAGE_TAG:$TRAVIS_TAG'"
-      fi
+      before_install:
+        - pip3 install -r requirements.txt
+      install: []
 
-script: docker buildx build --platform "$TARGET_ARCH" --progress plain -t $IMAGE_TAG $SPECIFIC_TAG
+      script:
+        - docker build --tag "$IMAGE_NAME" .
