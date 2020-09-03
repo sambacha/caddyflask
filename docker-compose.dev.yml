@@ -1,0 +1,18 @@
+# Caddyserver configuration
+version: "3.1"
+services:
+  caddy:
+    container_name: caddy
+    image: "abiosoft/caddy:latest"
+    volumes:
+      - ./certs:/root/certs
+      - ./local_caddyfile:/etc/local_caddyfile
+    ports:
+      - "443:2015"
+  flask:
+    build: .
+    container_name: flask
+    links:
+      - caddy
+    volumes:
+      - .:/app
