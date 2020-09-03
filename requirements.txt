@@ -1,0 +1,10 @@
+Certifi==2019.9.11
+Chardet==3.0.4
+Click==7.0
+Flask==1.1.1
+Idna==2.8
+Itsdangerous==1.1.0
+Jinja2==2.10.3
+MarkupSafe==1.1.1
+Urllib3==1.25.6
+Werkzeug==0.16.0

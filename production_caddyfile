@@ -1,0 +1,6 @@
+flask.localhost {
+    log stdout
+    proxy / flask:5000 {
+        transparent
+    }
+}

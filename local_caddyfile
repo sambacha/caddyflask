@@ -1,0 +1,7 @@
+flask.localhost {
+    log stdout
+    tls /root/certs/flask.localhost.pem /root/certs/flask.localhost-key.pem
+    proxy / flask:5000 {
+        transparent
+    }
+}
