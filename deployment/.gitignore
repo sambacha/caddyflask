@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+*.keys
+*.pkcs
+*.ks
+*.jks
+*.tgz
+*.tar.gz
