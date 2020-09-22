@@ -1,0 +1,3 @@
+# enviornment variables file
+LOG=single
+LC_ALL=C
