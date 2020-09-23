@@ -1,8 +1,13 @@
 # Travis-CI
-dist: bionic
-language: python
-os: linux
 
+os: linux
+dist: bionic
+
+language: python
+
+git:
+  quiet: true
+  
 matrix:
   include:
     - python: '3.6'
@@ -15,7 +20,7 @@ matrix:
 
       before_install:
         - pip3 install -r requirements.txt
-      install: []
+      install: pip3 install -r requirements.txt
 
       script:
-        - docker build --tag "$IMAGE_NAME" .
+        - pytest && docker build --tag "$IMAGE_NAME" .
