@@ -23,4 +23,4 @@ matrix:
       install: pip3 install -r requirements.txt
 
       script:
-        - docker build --tag "$IMAGE_NAME" .
+        - pytest && docker build --tag "$IMAGE_NAME" .
